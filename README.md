@@ -13,6 +13,8 @@ pip install -r requirements.txt
 
 ## plot_number_of_contributors.py
 
+`plot_number_of_contributors.py` is a versatile script designed to analyze and visualize contributor activity within a Git repository. By examining commit history, it identifies continuous contribution periods and aggregates contributor data over time, providing insights into both individual and collective engagement patterns. The script offers configurable parameters to tailor the analysis, such as specifying the branch, excluding certain contributors, and defining the time window for activity periods. It generates visualizations that highlight both all contributors and those with sustained activity, making it a valuable tool for understanding contributor dynamics in a project.
+
 The original work for this script was done
 here: [GitHub Issue Comment](https://github.com/drew2a/ivory-tower/issues/1#issuecomment-1884614714).
 
