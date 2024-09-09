@@ -74,7 +74,7 @@ contribution duration of 30 days. It highlights contributors who have been consi
 over a longer period, thus offering insights into sustained engagement.
 
 ```bash
-python plot_number_of_contributors.py --repo_path /path/to/repo --branch main --window_days 90 --granularity_days 1 --contribution_duration 30 --activity_plot_file continuous_contributors.png
+python plot_number_of_contributors.py --repo_path /path/to/repo --branch main --window_days 90 --granularity_days 1 --contribution_duration 30 --contributor_count_plot_file continuous_contributors.png
 ```
 
 ![ccontributors2](https://github.com/user-attachments/assets/bb11ab72-791a-46f6-9058-bb526f95bad6)
