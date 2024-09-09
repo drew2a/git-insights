@@ -41,7 +41,19 @@ The script `plot_number_of_contributors.py` accepts the following configurable p
 
 ### Examples
 
-To generate the graphs, use the following commands:
+To generate the graphs, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Navigate into the cloned repository:
+   ```bash
+   cd <repository-directory>
+   ```
+
+Then, use the following commands:
 
 #### All Contributors
 
