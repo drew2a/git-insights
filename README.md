@@ -1,6 +1,8 @@
 # git-insights
 A collection of scripts for analyzing and visualizing Git repositories. Explore commit history, contributor activity, code changes, and more with easy-to-use tools designed to help you gain insights into your codebase.
 
+The original work for this script was done here: [GitHub Issue Comment](https://github.com/drew2a/ivory-tower/issues/1#issuecomment-1884614714).
+
 ## Configurable Parameters for `plot_number_of_contributors.py`
 
 The script `plot_number_of_contributors.py` accepts the following configurable parameters:
