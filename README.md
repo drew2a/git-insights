@@ -3,7 +3,23 @@ A collection of scripts for analyzing and visualizing Git repositories. Explore 
 
 The original work for this script was done here: [GitHub Issue Comment](https://github.com/drew2a/ivory-tower/issues/1#issuecomment-1884614714).
 
-## Configurable Parameters for `plot_number_of_contributors.py`
+## Prerequisites
+
+Ensure you have the following installed before running the scripts:
+
+- Python 3.x
+- GitPython
+- Matplotlib
+
+You can install the required Python packages using:
+
+```bash
+pip install -r requirements.txt
+```
+
+## plot_number_of_contributors.py
+
+### Configurable Parameters
 
 The script `plot_number_of_contributors.py` accepts the following configurable parameters:
 
@@ -18,7 +34,19 @@ The script `plot_number_of_contributors.py` accepts the following configurable p
 - `--activity_plot_file`: File name for the activity plot. Default is `out/activity_plot.png`.
 - `--contributor_count_plot_file`: File name for the contributor count plot. Default is `out/contributor_count_plot.png`.
 
-## Examples
+### Examples
+
+To generate the graphs, use the following commands:
+
+#### All Contributors
+```bash
+python plot_number_of_contributors.py --repo_path /path/to/repo --branch main --window_days 90 --granularity_days 15 --contribution_duration 1 --activity_plot_file all_contributors.png
+```
+
+#### Continuous Contributors
+```bash
+python plot_number_of_contributors.py --repo_path /path/to/repo --branch main --window_days 90 --granularity_days 1 --contribution_duration 30 --activity_plot_file continuous_contributors.png
+```
 
 ### All Contributors
 This example visualizes all contributors over time with a window of 90 days, granularity of 15 days, and a minimum contribution duration of 1 day. This setting captures all contributors who have made at least one commit within any 90-day period, providing a broad view of contributor activity.
