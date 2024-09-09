@@ -16,7 +16,17 @@ The script `plot_number_of_contributors.py` accepts the following configurable p
 - `--activity_plot_file`: File name for the activity plot. Default is `out/activity_plot.png`.
 - `--contributor_count_plot_file`: File name for the contributor count plot. Default is `out/contributor_count_plot.png`.
 
-## Parameters for `plot_contributor_count_over_time`
+## Examples
+
+### All Contributors
+This example visualizes all contributors over time with a window of 90 days, granularity of 15 days, and a minimum contribution duration of 1 day. This setting captures all contributors who have made at least one commit within any 90-day period, providing a broad view of contributor activity.
+
+![all_contributors](https://github.com/user-attachments/assets/59c44c57-ea72-4974-881a-f6a720ed57ff)
+
+### Continuous Contributors
+This example focuses on continuous contributors, using a window of 90 days, granularity of 1 day, and a minimum contribution duration of 30 days. It highlights contributors who have been consistently active, making contributions over a longer period, thus offering insights into sustained engagement.
+
+![ccontributors2](https://github.com/user-attachments/assets/bb11ab72-791a-46f6-9058-bb526f95bad6)
 
 The `plot_contributor_count_over_time` function takes the following parameters:
 
