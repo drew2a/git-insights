@@ -9,9 +9,9 @@ The script `plot_number_of_contributors.py` accepts the following configurable p
 - `--branch`: Branch to analyze. Default is `main`.
 - `--exclusions`: List of contributors to exclude. Default is `["dependabot", "snyk"]`.
 - `--delta_days`: Number of days to look back for commits. Default is 30 years (`365 * 30` days).
-- `--window_days`: Window of days for activity period. Default is 90 days.
-- `--granularity_days`: Granularity of activity period in days. Default is 15 days.
-- `--contribution_duration`: Minimum contribution duration to consider. Default is 1 day.
+- `--window_days`: The maximum allowed gap between consecutive commits to be considered as part of the same activity period. For example, a 7-day window means that if the gap between two commits is less than or equal to 7 days, they are considered part of a continuous contribution period. Default is 90 days.
+- `--granularity_days`: The minimum length of time that a contribution period must be to be considered. For instance, a 1-day granularity means that any period shorter than 1 day is extended to 1 day. Default is 15 days.
+- `--contribution_duration`: The minimum total number of days a contributor must have contributed to be included in the analysis. For example, a filter of "at least two days in total" means that only contributors who have made commits on two or more separate days throughout the entire period are included. Default is 1 day.
 - `--less_than_year`: Use less frequent date ticks on x-axis. This is a flag, so it has no default value.
 - `--activity_plot_file`: File name for the activity plot. Default is `out/activity_plot.png`.
 - `--contributor_count_plot_file`: File name for the contributor count plot. Default is `out/contributor_count_plot.png`.
