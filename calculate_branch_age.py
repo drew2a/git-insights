@@ -1,11 +1,11 @@
 import argparse
-import logging
 import datetime
+import logging
 import os
 import subprocess
-import matplotlib.pyplot as plt
+
 import matplotlib.dates as mdates
-from datetime import timedelta
+import matplotlib.pyplot as plt
 
 
 def run_git_command(command, repo_path):
@@ -17,10 +17,10 @@ def main():
     # Define color codes
     RESET = "\033[0m"
     COLORS = {
-        'DEBUG': "\033[94m",    # Blue
-        'INFO': "\033[92m",     # Green
+        'DEBUG': "\033[94m",  # Blue
+        'INFO': "\033[92m",  # Green
         'WARNING': "\033[93m",  # Yellow
-        'ERROR': "\033[91m",    # Red
+        'ERROR': "\033[91m",  # Red
         'CRITICAL': "\033[95m"  # Magenta
     }
 
@@ -38,7 +38,8 @@ def main():
 
     parser = argparse.ArgumentParser(description='Calculate the age of release branches.')
     parser.add_argument('--repo_path', type=str, required=True, help='Path to the repository')
-    parser.add_argument('--output_file', type=str, default='out/branch_ages.png', help='File name for the branch age plot')
+    parser.add_argument('--output_file', type=str, default='out/branch_ages.png',
+                        help='File name for the branch age plot')
     args = parser.parse_args()
 
     # Fetch all branches
@@ -94,14 +95,15 @@ def main():
         branch_name = branch_info[0].split(': ')[1]
         latest_commit_date = datetime.datetime.strptime(branch_info[1].split(': ')[1], '%Y-%m-%d %H:%M:%S%z')
         fork_date = datetime.datetime.strptime(branch_info[2].split(': ')[1], '%Y-%m-%d %H:%M:%S%z')
-        
+
         branch_names.append(branch_name)
         start_dates.append(fork_date)
         end_dates.append(latest_commit_date)
 
     # Plotting
-    plt.figure(figsize=(12, len(branch_names) * 0.6))
-    plt.barh(branch_names, [(end - start).days for start, end in zip(start_dates, end_dates)], left=start_dates, color='skyblue', edgecolor='black')
+    plt.figure(figsize=(12, len(branch_names) ))
+    plt.barh(branch_names, [(end - start).days for start, end in zip(start_dates, end_dates)], left=start_dates,
+             color='skyblue', edgecolor='black')
     plt.xlabel('Date')
     plt.ylabel('Branches')
     plt.title('Branch Ages')
@@ -111,6 +113,7 @@ def main():
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig(args.output_file)
     logging.info(f"Branch age plot saved to: {os.path.abspath(args.output_file)}")
+
 
 if __name__ == '__main__':
     main()
