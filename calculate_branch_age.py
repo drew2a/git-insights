@@ -2,6 +2,9 @@ import argparse
 import logging
 import datetime
 import subprocess
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from datetime import timedelta
 
 
 def run_git_command(command, repo_path):
@@ -78,8 +81,33 @@ def main():
         info[latest_commit_date] = s
 
     logging.info("Calculating branch ages")
+
+    # Prepare data for plotting
+    branch_names = []
+    start_dates = []
+    end_dates = []
     for d in sorted(info.keys(), reverse=True):
         print(info[d])
+        branch_info = info[d].split('\n')
+        branch_name = branch_info[0].split(': ')[1]
+        latest_commit_date = datetime.datetime.strptime(branch_info[1].split(': ')[1], '%Y-%m-%d %H:%M:%S%z')
+        fork_date = datetime.datetime.strptime(branch_info[2].split(': ')[1], '%Y-%m-%d %H:%M:%S%z')
+        
+        branch_names.append(branch_name)
+        start_dates.append(fork_date)
+        end_dates.append(latest_commit_date)
+
+    # Plotting
+    plt.figure(figsize=(10, len(branch_names) * 0.5))
+    plt.barh(branch_names, [(end - start).days for start, end in zip(start_dates, end_dates)], left=start_dates, color='skyblue', edgecolor='black')
+    plt.xlabel('Date')
+    plt.ylabel('Branches')
+    plt.title('Branch Ages')
+    plt.gca().xaxis.set_major_locator(mdates.YearLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
 
 if __name__ == '__main__':
     main()
