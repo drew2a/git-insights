@@ -64,8 +64,12 @@ def main():
         oldest_commit = run_git_command(f'git log --pretty=format:"%h" {branch}..origin/main | tail -1', args.repo_path)
 
         # Find the fork commit
-        logging.info(f"Finding fork commit for branch {branch}")
-        fork_commit = run_git_command(f'git merge-base {oldest_commit} {branch}', args.repo_path)
+        if oldest_commit:
+            logging.info(f"Finding fork commit for branch {branch}")
+            fork_commit = run_git_command(f'git merge-base {oldest_commit} {branch}', args.repo_path)
+        else:
+            logging.warning(f"No oldest commit found for branch {branch}. Skipping fork commit calculation.")
+            continue
 
         # Get the dates for the fork commit and the latest commit
         logging.info(f"Getting dates for fork commit {fork_commit} and latest commit in {branch}")
