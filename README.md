@@ -122,3 +122,9 @@ python calculate_branch_age.py --repo_path ../../Tribler/tribler --branch_regex 
 ```
 
 ![branch_ages](https://github.com/user-attachments/assets/branch_ages_example.png)
+
+Then, use the following command to plot all branches older than 100 days for https://github.com/arvidn/libtorrent
+
+```bash
+python calculate_branch_age.py --repo_path ../../arvidn/libtorrent --main_branch master --min_age 100
+```
