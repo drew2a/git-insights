@@ -108,6 +108,10 @@ def main():
         start_dates.append(fork_date)
         end_dates.append(latest_commit_date)
 
+    if not start_dates:
+        logging.error("No valid branch data found. Exiting.")
+        return
+
     # Plotting
     plt.figure(figsize=(12, max(5, len(branch_names))))
     bar_widths = [(end - start).days for start, end in zip(start_dates, end_dates)]
