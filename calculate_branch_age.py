@@ -100,7 +100,7 @@ def main():
         end_dates.append(latest_commit_date)
 
     # Plotting
-    plt.figure(figsize=(10, len(branch_names) * 0.5))
+    plt.figure(figsize=(12, len(branch_names) * 0.6))
     plt.barh(branch_names, [(end - start).days for start, end in zip(start_dates, end_dates)], left=start_dates, color='skyblue', edgecolor='black')
     plt.xlabel('Date')
     plt.ylabel('Branches')
@@ -108,8 +108,7 @@ def main():
     plt.gca().xaxis.set_major_locator(mdates.YearLocator())
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.subplots_adjust(top=0.9, right=0.9)
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig(args.output_file)
     logging.info(f"Branch age plot saved to: {os.path.abspath(args.output_file)}")
 
