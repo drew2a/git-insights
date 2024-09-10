@@ -126,10 +126,6 @@ def main():
         next_month = current_month.month % 12 + 1
         next_year = current_month.year + (current_month.month // 12)
         current_month = current_month.replace(year=next_year, month=next_month)
-    min_date = min(start_dates)
-    max_date = max(end_dates)
-    plt.text(min_date, -1, min_date.strftime('%Y-%m-%d'), va='center', ha='right', color='black', fontsize=8)
-    plt.text(max_date, -1, max_date.strftime('%Y-%m-%d'), va='center', ha='left', color='black', fontsize=8)
 
     plt.savefig(args.output_file)
     logging.info(f"Branch age plot saved to: {os.path.abspath(args.output_file)}")
