@@ -3,6 +3,16 @@
 A collection of scripts for analyzing and visualizing Git repositories. Explore commit history, contributor activity,
 code changes, and more with easy-to-use tools designed to help you gain insights into your codebase.
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [plot_number_of_contributors.py](#plot_number_of_contributorspy)
+  - [Configurable Parameters](#configurable-parameters)
+  - [Examples](#examples)
+- [calculate_branch_age.py](#calculate_branch_agepy)
+  - [Configurable Parameters](#configurable-parameters-1)
+  - [Examples](#examples-1)
+
 ## Prerequisites
 
 You can install the required Python packages using:
