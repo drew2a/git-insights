@@ -115,6 +115,12 @@ def main():
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     plt.xticks(rotation=45)
     plt.tight_layout(rect=[0, 0, 1, 0.95])
+    # Add start and end date labels on the x-axis
+    min_date = min(start_dates)
+    max_date = max(end_dates)
+    plt.text(min_date, -1, min_date.strftime('%Y-%m-%d'), va='center', ha='right', color='black', fontsize=8)
+    plt.text(max_date, -1, max_date.strftime('%Y-%m-%d'), va='center', ha='left', color='black', fontsize=8)
+
     plt.savefig(args.output_file)
     logging.info(f"Branch age plot saved to: {os.path.abspath(args.output_file)}")
 
