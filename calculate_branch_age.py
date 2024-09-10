@@ -49,7 +49,11 @@ def main():
     # Get all release branches
     logging.info("Getting all release branches")
     branches = run_git_command('git branch -r', args.repo_path).split('\n')
-    release_branches = [branch for branch in branches if 'origin/release' in branch]
+    if not branches:
+        logging.error("No branches found. Exiting.")
+        return
+
+    release_branches = [branch.strip() for branch in branches]
 
     info = {}
     for branch in release_branches:
