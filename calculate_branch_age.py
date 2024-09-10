@@ -40,6 +40,8 @@ def main():
     parser.add_argument('--repo_path', type=str, required=True, help='Path to the repository')
     parser.add_argument('--output_file', type=str, default='out/branch_ages.png',
                         help='File name for the branch age plot')
+    parser.add_argument('--branch_regex', type=str, default='.+', help='Regex pattern to filter branches')
+    parser.add_argument('--include_zero_age', action='store_true', help='Include branches with age 0 days')
     args = parser.parse_args()
 
     # Fetch all branches
@@ -53,7 +55,9 @@ def main():
         logging.error("No branches found. Exiting.")
         return
 
-    release_branches = [branch.strip() for branch in branches]
+    import re
+    branch_pattern = re.compile(args.branch_regex)
+    release_branches = [branch.strip() for branch in branches if branch_pattern.match(branch.strip())]
 
     info = {}
     for branch in release_branches:
@@ -89,7 +93,8 @@ def main():
             f"\tFork commit: {fork_commit}\n" \
             f"\tAge: {age_days} days"
 
-        info[latest_commit_date] = s
+        if age_days > 0 or args.include_zero_age:
+            info[latest_commit_date] = s
 
     logging.info("Calculating branch ages")
 

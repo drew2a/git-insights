@@ -101,6 +101,8 @@ The script `calculate_branch_age.py` accepts the following configurable paramete
 
 - `--repo_path`: Path to the repository. This parameter is required.
 - `--output_file`: File name for the branch age plot. Default is `out/branch_ages.png`.
+- `--branch_regex`: Regex pattern to filter branches. Default is `.+`.
+- `--include_zero_age`: Include branches with age 0 days. This is a flag, so it has no default value.
 
 ### Examples
 
