@@ -90,8 +90,8 @@ python plot_number_of_contributors.py --repo_path /path/to/repo --branch main --
 
 ## calculate_branch_age.py
 
-`calculate_branch_age.py` is a script designed to calculate and visualize the age of release branches in a Git
-repository. It fetches all release branches, determines the fork and latest commit dates for each branch, and calculates
+`calculate_branch_age.py` is a script designed to calculate and visualize the age of branches in a Git
+repository. It fetches all branches, determines the fork and latest commit dates for each branch, and calculates
 the age in days. The script then generates a horizontal bar plot showing the age of each branch, with additional labels
 for the start and end dates of each branch's age.
 
