@@ -124,7 +124,7 @@ def main():
 
     # Add labels to the bars
     for i, (start, width) in enumerate(zip(start_dates, bar_widths)):
-        plt.text(start + datetime.timedelta(days=width/2), i, f'{width} days', va='center', ha='center', color='black')
+        plt.text(start + datetime.timedelta(days=width/2), i, f'{width}\ndays', va='center', ha='center', color='black')
     plt.xlabel('Date')
     plt.ylabel('Branches')
     plt.title('Branch Ages')
