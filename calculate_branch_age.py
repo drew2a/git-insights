@@ -102,8 +102,12 @@ def main():
 
     # Plotting
     plt.figure(figsize=(12, len(branch_names) ))
-    plt.barh(branch_names, [(end - start).days for start, end in zip(start_dates, end_dates)], left=start_dates,
-             color='skyblue', edgecolor='black')
+    bar_widths = [(end - start).days for start, end in zip(start_dates, end_dates)]
+    plt.barh(branch_names, bar_widths, left=start_dates, color='skyblue', edgecolor='black')
+
+    # Add labels to the bars
+    for i, (start, width) in enumerate(zip(start_dates, bar_widths)):
+        plt.text(start + datetime.timedelta(days=width/2), i, f'{width} days', va='center', ha='center', color='black')
     plt.xlabel('Date')
     plt.ylabel('Branches')
     plt.title('Branch Ages')
