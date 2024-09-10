@@ -151,7 +151,7 @@ def main():
         next_year = current_month.year + (current_month.month // 12)
         current_month = current_month.replace(year=next_year, month=next_month)
 
-    plt.subplots_adjust(left=0.2)  # Adjust the left margin to fit y-axis labels
+    plt.subplots_adjust(left=0.3)  # Further adjust the left margin to fit y-axis labels
     plt.savefig(args.output_file)
     logging.info(f"Branch age plot saved to: {os.path.abspath(args.output_file)}")
 
