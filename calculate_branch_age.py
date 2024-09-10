@@ -141,7 +141,7 @@ def main():
                  fontsize=8, rotation=90)
 
     plt.xticks([])
-    plt.tight_layout()
+    plt.tight_layout(pad=1.0)
 
     # Add vertical gray lines for each month
     current_month = min(start_dates).replace(day=1)
