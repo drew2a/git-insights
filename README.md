@@ -11,7 +11,38 @@ You can install the required Python packages using:
 pip install -r requirements.txt
 ```
 
-## plot_number_of_contributors.py
+## calculate_branch_age.py
+
+`calculate_branch_age.py` is a script designed to calculate and visualize the age of release branches in a Git repository. It fetches all release branches, determines the fork and latest commit dates for each branch, and calculates the age in days. The script then generates a horizontal bar plot showing the age of each branch, with additional labels for the start and end dates of each branch's age.
+
+### Configurable Parameters
+
+The script `calculate_branch_age.py` accepts the following configurable parameters:
+
+- `--repo_path`: Path to the repository. This parameter is required.
+- `--output_file`: File name for the branch age plot. Default is `out/branch_ages.png`.
+
+### Examples
+
+To generate the branch age plot, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Navigate into the cloned repository:
+   ```bash
+   cd <repository-directory>
+   ```
+
+Then, use the following command:
+
+```bash
+python calculate_branch_age.py --repo_path /path/to/repo --output_file branch_ages.png
+```
+
+![branch_ages](https://github.com/user-attachments/assets/branch_ages_example.png)
 
 `plot_number_of_contributors.py` is a versatile script designed to analyze and visualize contributor activity within a Git repository. By examining commit history, it identifies continuous contribution periods and aggregates contributor data over time, providing insights into both individual and collective engagement patterns. The script offers configurable parameters to tailor the analysis, such as specifying the branch, excluding certain contributors, and defining the time window for activity periods. It generates visualizations that highlight both all contributors and those with sustained activity, making it a valuable tool for understanding contributor dynamics in a project.
 
