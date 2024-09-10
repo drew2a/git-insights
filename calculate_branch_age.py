@@ -41,7 +41,7 @@ def main():
                         help='File name for the branch age plot')
     parser.add_argument('--main_branch', type=str, default='main', help='Name of the main branch to compare against')
     parser.add_argument('--branch_regex', type=str, default='.+', help='Regex pattern to filter branches')
-    parser.add_argument('--include_zero_age', action='store_true', help='Include branches with age 0 days')
+    parser.add_argument('--min_age', type=int, default=0, help='Minimum age of branches to include in days')
     args = parser.parse_args()
 
     # Fetch all branches
@@ -97,7 +97,7 @@ def main():
             f"\tFork commit: {fork_commit}\n" \
             f"\tAge: {age_days} days"
 
-        if age_days > 0 or args.include_zero_age:
+        if age_days >= args.min_age:
             info[latest_commit_date] = s
 
     logging.info("Calculating branch ages")
