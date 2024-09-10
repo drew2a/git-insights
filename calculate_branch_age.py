@@ -1,21 +1,28 @@
 import argparse
+import logging
 import datetime
 import subprocess
 
 
 def run_git_command(command, repo_path):
+    logging.info(f"Executing command: {command} in {repo_path}")
     return subprocess.check_output(command, cwd=repo_path, shell=True).decode('utf-8').strip()
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.info("Starting branch age calculation")
+
     parser = argparse.ArgumentParser(description='Calculate the age of release branches.')
     parser.add_argument('--repo_path', type=str, required=True, help='Path to the repository')
     args = parser.parse_args()
 
     # Fetch all branches
+    logging.info("Fetching all branches")
     run_git_command('git fetch --all', args.repo_path)
 
     # Get all release branches
+    logging.info("Getting all release branches")
     branches = run_git_command('git branch -r', args.repo_path).split('\n')
     release_branches = [branch for branch in branches if 'origin/release' in branch]
 
@@ -24,12 +31,15 @@ def main():
         branch = branch.strip()
 
         # Find the oldest commit in the main branch that's not in the release branch
+        logging.info(f"Finding oldest commit in main branch not in {branch}")
         oldest_commit = run_git_command(f'git log --pretty=format:"%h" {branch}..origin/main | tail -1', args.repo_path)
 
         # Find the fork commit
+        logging.info(f"Finding fork commit for branch {branch}")
         fork_commit = run_git_command(f'git merge-base {oldest_commit} {branch}', args.repo_path)
 
         # Get the dates for the fork commit and the latest commit
+        logging.info(f"Getting dates for fork commit {fork_commit} and latest commit in {branch}")
         fork_commit_date = run_git_command(f'git show -s --format=%ci {fork_commit}', args.repo_path)
         latest_commit_date = run_git_command(f'git log -1 --format=%ci {branch}', args.repo_path)
 
@@ -48,6 +58,7 @@ def main():
 
         info[latest_commit_date] = s
 
+    logging.info("Calculating branch ages")
     for d in sorted(info.keys(), reverse=True):
         print(info[d])
 
