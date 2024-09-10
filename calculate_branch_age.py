@@ -111,8 +111,6 @@ def main():
     plt.xlabel('Date')
     plt.ylabel('Branches')
     plt.title('Branch Ages')
-    plt.gca().xaxis.set_major_locator(mdates.YearLocator())
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     plt.xticks(rotation=45)
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     # Add start and end date labels on the x-axis
