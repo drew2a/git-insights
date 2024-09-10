@@ -37,6 +37,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='Calculate the age of release branches.')
     parser.add_argument('--repo_path', type=str, required=True, help='Path to the repository')
+    parser.add_argument('--output_file', type=str, default='out/branch_ages.png', help='File name for the branch age plot')
     args = parser.parse_args()
 
     # Fetch all branches
@@ -107,7 +108,8 @@ def main():
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(args.output_file)
+    logging.info(f"Branch age plot saved to: {os.path.abspath(args.output_file)}")
 
 if __name__ == '__main__':
     main()
