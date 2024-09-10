@@ -111,7 +111,7 @@ def main():
     plt.xlabel('Date')
     plt.ylabel('Branches')
     plt.title('Branch Ages')
-    plt.xticks(rotation=45)
+    plt.xticks([])
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     # Add vertical gray lines for each month
     current_month = min(start_dates).replace(day=1)
