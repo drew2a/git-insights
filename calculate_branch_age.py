@@ -101,7 +101,7 @@ def main():
         end_dates.append(latest_commit_date)
 
     # Plotting
-    plt.figure(figsize=(12, len(branch_names) ))
+    plt.figure(figsize=(12, max(5, len(branch_names))))
     bar_widths = [(end - start).days for start, end in zip(start_dates, end_dates)]
     plt.barh(branch_names, bar_widths, left=start_dates, color='skyblue', edgecolor='black')
 
@@ -117,7 +117,7 @@ def main():
         plt.text(end, i, end.strftime('%Y-%m-%d'), va='center', ha='left', color='black', fontsize=8)
 
     plt.xticks([])
-    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.tight_layout()
 
     # Add vertical gray lines for each month
     current_month = min(start_dates).replace(day=1)
