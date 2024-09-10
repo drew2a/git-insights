@@ -109,6 +109,7 @@ def main():
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     plt.xticks(rotation=45)
     plt.tight_layout()
+    plt.subplots_adjust(top=0.9, right=0.9)
     plt.savefig(args.output_file)
     logging.info(f"Branch age plot saved to: {os.path.abspath(args.output_file)}")
 
