@@ -1,5 +1,6 @@
 import argparse
 import os
+import logging
 from collections import defaultdict
 from datetime import datetime, timedelta
 
@@ -23,7 +24,7 @@ def parse_mailmap(repo_path):
                         canonical_name = name
                     mailmap[email] = canonical_name
     except FileNotFoundError:
-        print(".mailmap file not found, continuing without it")
+        logging.warning(".mailmap file not found, continuing without it")
     return mailmap
 
 
@@ -82,7 +83,7 @@ def count_contributors(repo_path, branch, mailmap, exclusions, delta, window, gr
     else:
         commits = list(repo.iter_commits(branch))
     total_commits = len(commits)
-    print(f"Analyzing {total_commits} commits...")
+    logging.info(f"Analyzing {total_commits} commits...")
 
     # Iterating over commits in the specified branch
     for i, commit in enumerate(commits, start=1):
@@ -97,7 +98,7 @@ def count_contributors(repo_path, branch, mailmap, exclusions, delta, window, gr
 
         # Print progress every 10% of the total commits
         if i % (total_commits // 10) == 0 or i == total_commits:
-            print(f"Processed {i}/{total_commits} commits ({(i / total_commits) * 100:.1f}%)")
+            logging.info(f"Processed {i}/{total_commits} commits ({(i / total_commits) * 100:.1f}%)")
 
     return process_activity_periods(contributors, window, granularity)
 
@@ -156,7 +157,7 @@ def plot_contributors(activity_periods, args, less_than_year=False):
     plt.xlim(min_date - buffer, max_date + buffer)
     plt.tight_layout()
     plt.savefig(args.activity_plot_file)
-    print(f"\033[92mActivity plot saved to: {os.path.abspath(args.activity_plot_file)}\033[0m")
+    logging.info(f"Activity plot saved to: {os.path.abspath(args.activity_plot_file)}")
 
 
 def aggregate_contributors_by_time(activity_periods):
@@ -236,7 +237,7 @@ def plot_contributor_count_over_time(aggregated_data, args):
 
     plt.tight_layout()
     plt.savefig(args.contributor_count_plot_file)
-    print(f"\033[92mContributor count plot saved to: {os.path.abspath(args.contributor_count_plot_file)}\033[0m")
+    logging.info(f"Contributor count plot saved to: {os.path.abspath(args.contributor_count_plot_file)}")
 
 
 def main():
@@ -254,7 +255,27 @@ def main():
 
     args = parser.parse_args()
 
-    # Parsing the .mailmap file
+    # Define color codes
+    RESET = "\033[0m"
+    COLORS = {
+        'DEBUG': "\033[94m",    # Blue
+        'INFO': "\033[92m",     # Green
+        'WARNING': "\033[93m",  # Yellow
+        'ERROR': "\033[91m",    # Red
+        'CRITICAL': "\033[95m"  # Magenta
+    }
+
+    class ColoredFormatter(logging.Formatter):
+        def format(self, record):
+            log_fmt = f"{COLORS.get(record.levelname, RESET)}%(asctime)s - %(levelname)s - %(message)s{RESET}"
+            formatter = logging.Formatter(log_fmt)
+            return formatter.format(record)
+
+    # Set up logging with colors
+    handler = logging.StreamHandler()
+    handler.setFormatter(ColoredFormatter())
+    logging.basicConfig(level=logging.INFO, handlers=[handler])
+    logging.info("Starting contributor activity analysis")
     mailmap = parse_mailmap(args.repo_path)
 
     # Analyzing the repository for continuous contribution periods
