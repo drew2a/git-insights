@@ -113,7 +113,13 @@ def main():
     plt.title('Branch Ages')
     plt.xticks(rotation=45)
     plt.tight_layout(rect=[0, 0, 1, 0.95])
-    # Add start and end date labels on the x-axis
+    # Add vertical gray lines for each month
+    current_month = min(start_dates).replace(day=1)
+    while current_month <= max(end_dates):
+        plt.axvline(current_month, color='gray', linestyle='--', linewidth=0.5)
+        next_month = current_month.month % 12 + 1
+        next_year = current_month.year + (current_month.month // 12)
+        current_month = current_month.replace(year=next_year, month=next_month)
     min_date = min(start_dates)
     max_date = max(end_dates)
     plt.text(min_date, -1, min_date.strftime('%Y-%m-%d'), va='center', ha='right', color='black', fontsize=8)
