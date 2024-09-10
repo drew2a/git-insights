@@ -121,10 +121,12 @@ Then, use the following command to plot all "release" branches (in this example 
 python calculate_branch_age.py --repo_path ../../Tribler/tribler --branch_regex ".+release.+"
 ```
 
-![branch_ages](https://github.com/user-attachments/assets/branch_ages_example.png)
+![tribler_branch_ages](https://github.com/user-attachments/assets/562e6765-bdf0-478b-9b4d-df1bb6cf08d2)
 
 Then, use the following command to plot all branches older than 100 days for https://github.com/arvidn/libtorrent
 
 ```bash
 python calculate_branch_age.py --repo_path ../../arvidn/libtorrent --main_branch master --min_age 100
 ```
+
+![libtorrent_branch_ages](https://github.com/user-attachments/assets/1774e42f-fe64-40c3-b755-ebc5eda36309)
