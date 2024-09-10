@@ -70,7 +70,11 @@ def main():
         # Find the fork commit
         if oldest_commit:
             logging.info(f"Finding fork commit for branch {branch}")
-            fork_commit = run_git_command(f'git merge-base {oldest_commit} {branch}', args.repo_path)
+            try:
+                fork_commit = run_git_command(f'git merge-base {oldest_commit} {branch}', args.repo_path)
+            except subprocess.CalledProcessError as e:
+                logging.error(f"Failed to find merge base for branch {branch} with error: {e}. Skipping this branch.")
+                continue
         else:
             logging.warning(f"No oldest commit found for branch {branch}. Skipping fork commit calculation.")
             continue
