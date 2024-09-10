@@ -10,7 +10,26 @@ def run_git_command(command, repo_path):
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    # Define color codes
+    RESET = "\033[0m"
+    COLORS = {
+        'DEBUG': "\033[94m",    # Blue
+        'INFO': "\033[92m",     # Green
+        'WARNING': "\033[93m",  # Yellow
+        'ERROR': "\033[91m",    # Red
+        'CRITICAL': "\033[95m"  # Magenta
+    }
+
+    class ColoredFormatter(logging.Formatter):
+        def format(self, record):
+            log_fmt = f"{COLORS.get(record.levelname, RESET)}%(asctime)s - %(levelname)s - %(message)s{RESET}"
+            formatter = logging.Formatter(log_fmt)
+            return formatter.format(record)
+
+    # Set up logging with colors
+    handler = logging.StreamHandler()
+    handler.setFormatter(ColoredFormatter())
+    logging.basicConfig(level=logging.INFO, handlers=[handler])
     logging.info("Starting branch age calculation")
 
     parser = argparse.ArgumentParser(description='Calculate the age of release branches.')
