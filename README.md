@@ -7,11 +7,11 @@ code changes, and more with easy-to-use tools designed to help you gain insights
 
 - [Prerequisites](#prerequisites)
 - [plot_number_of_contributors.py](#plot_number_of_contributorspy)
-  - [Configurable Parameters](#configurable-parameters)
-  - [Examples](#examples)
+    - [Configurable Parameters](#configurable-parameters)
+    - [Examples](#examples)
 - [calculate_branch_age.py](#calculate_branch_agepy)
-  - [Configurable Parameters](#configurable-parameters-1)
-  - [Examples](#examples-1)
+    - [Configurable Parameters](#configurable-parameters-1)
+    - [Examples](#examples-1)
 
 ## Prerequisites
 
@@ -114,10 +114,10 @@ Clone the target repository:
  git clone <repository-url>
  ```
 
-Then, use the following command:
+Then, use the following command to plot all "release" branches (in this example it is Tribler's repo):
 
 ```bash
-python calculate_branch_age.py --repo_path /path/to/repo --output_file branch_ages.png
+python calculate_branch_age.py --repo_path ../../Tribler/tribler --branch_regex ".+release.+"
 ```
 
 ![branch_ages](https://github.com/user-attachments/assets/branch_ages_example.png)

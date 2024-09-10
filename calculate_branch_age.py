@@ -4,7 +4,6 @@ import logging
 import os
 import subprocess
 
-import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 
@@ -124,14 +123,17 @@ def main():
 
     # Add labels to the bars
     for i, (start, width) in enumerate(zip(start_dates, bar_widths)):
-        plt.text(start + datetime.timedelta(days=width/2), i, f'{width}\ndays', va='center', ha='center', color='black')
+        plt.text(start + datetime.timedelta(days=width / 2), i, f'{width}\ndays', va='center', ha='center',
+                 color='black')
     plt.xlabel('Date')
     plt.ylabel('Branches')
     plt.title('Branch Ages')
     # Add labels for the start and end of each branch age
     for i, (start, end) in enumerate(zip(start_dates, end_dates)):
-        plt.text(start - datetime.timedelta(days=1), i, start.strftime('%Y-%m-%d'), va='center', ha='right', color='black', fontsize=8, rotation=90)
-        plt.text(end + datetime.timedelta(days=1), i, end.strftime('%Y-%m-%d'), va='center', ha='left', color='black', fontsize=8, rotation=90)
+        plt.text(start - datetime.timedelta(days=10), i, start.strftime('%Y-%m-%d'), va='center', ha='right',
+                 color='black', fontsize=8, rotation=90)
+        plt.text(end + datetime.timedelta(days=10), i, end.strftime('%Y-%m-%d'), va='center', ha='left', color='black',
+                 fontsize=8, rotation=90)
 
     plt.xticks([])
     plt.tight_layout()
