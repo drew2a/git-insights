@@ -39,6 +39,7 @@ def main():
     parser.add_argument('--repo_path', type=str, required=True, help='Path to the repository')
     parser.add_argument('--output_file', type=str, default='out/branch_ages.png',
                         help='File name for the branch age plot')
+    parser.add_argument('--main_branch', type=str, default='main', help='Name of the main branch to compare against')
     parser.add_argument('--branch_regex', type=str, default='.+', help='Regex pattern to filter branches')
     parser.add_argument('--include_zero_age', action='store_true', help='Include branches with age 0 days')
     args = parser.parse_args()
@@ -64,7 +65,7 @@ def main():
 
         # Find the oldest commit in the main branch that's not in the release branch
         logging.info(f"Finding oldest commit in main branch not in {branch}")
-        oldest_commit = run_git_command(f'git log --pretty=format:"%h" {branch}..origin/main | tail -1', args.repo_path)
+        oldest_commit = run_git_command(f'git log --pretty=format:"%h" {branch}..origin/{args.main_branch} | tail -1', args.repo_path)
 
         # Find the fork commit
         if oldest_commit:

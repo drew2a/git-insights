@@ -103,6 +103,7 @@ The script `calculate_branch_age.py` accepts the following configurable paramete
 - `--output_file`: File name for the branch age plot. Default is `out/branch_ages.png`.
 - `--branch_regex`: Regex pattern to filter branches. Default is `.+`.
 - `--include_zero_age`: Include branches with age 0 days. This is a flag, so it has no default value.
+- `--main_branch`: Name of the main branch to compare against. Default is `main`.
 
 ### Examples
 
