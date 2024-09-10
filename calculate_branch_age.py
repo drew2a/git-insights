@@ -111,8 +111,14 @@ def main():
     plt.xlabel('Date')
     plt.ylabel('Branches')
     plt.title('Branch Ages')
+    # Add labels for the start and end of each branch age
+    for i, (start, end) in enumerate(zip(start_dates, end_dates)):
+        plt.text(start, i, start.strftime('%Y-%m-%d'), va='center', ha='right', color='black', fontsize=8)
+        plt.text(end, i, end.strftime('%Y-%m-%d'), va='center', ha='left', color='black', fontsize=8)
+
     plt.xticks([])
     plt.tight_layout(rect=[0, 0, 1, 0.95])
+
     # Add vertical gray lines for each month
     current_month = min(start_dates).replace(day=1)
     while current_month <= max(end_dates):
