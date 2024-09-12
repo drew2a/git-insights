@@ -14,7 +14,7 @@ code changes, and more with easy-to-use tools designed to help you gain insights
     - [Configurable Parameters](#configurable-parameters-1)
     - [Examples](#examples-1)
 - [plot_open_issues](#plot_open_issues)
-    - [Parameters](#configurable-parameters-2)
+    - [Configurable Parameters](#configurable-parameters-2)
     - [Examples](#examples-2)
 
 ## Prerequisites
@@ -169,3 +169,5 @@ python plot_open_issues.py --repo Tribler/tribler --labels "type: bug" --output_
 
 This command will fetch issues and releases from the specified repository, save the data to JSON files, and generate a
 plot of open bugs over time with colored release periods and timestamps.
+
+![open_issues_plot](https://github.com/user-attachments/assets/a2af5be3-35c1-4572-88ec-cca4f016b9ea)
