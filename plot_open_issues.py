@@ -25,8 +25,8 @@ def fetch_github_data(repo, endpoint, params={}):
 def main():
     parser = argparse.ArgumentParser(description='Fetch and save GitHub issues and releases.')
     parser.add_argument('--repo', type=str, default='Tribler/tribler', help='GitHub repository in the format "owner/repo"')
-    parser.add_argument('--issues_file', type=str, default='issues.json', help='File to save issues data')
-    parser.add_argument('--releases_file', type=str, default='releases.json', help='File to save releases data')
+    parser.add_argument('--issues_file', type=str, default='out/issues.json', help='File to save issues data')
+    parser.add_argument('--releases_file', type=str, default='out/releases.json', help='File to save releases data')
     args = parser.parse_args()
 
     # Define the repository
