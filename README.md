@@ -130,3 +130,5 @@ python calculate_branch_age.py --repo_path ../../arvidn/libtorrent --main_branch
 ```
 
 ![libtorrent_branch_ages](https://github.com/user-attachments/assets/1774e42f-fe64-40c3-b755-ebc5eda36309)
+
+## plot_open_issues.py
