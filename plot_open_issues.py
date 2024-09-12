@@ -57,8 +57,6 @@ def main():
     parser.add_argument('--issues_file', type=str, default='out/issues.json', help='File to save issues data')
     parser.add_argument('--releases_file', type=str, default='out/releases.json', help='File to save releases data')
     parser.add_argument('--override', action='store_true', help='Override existing files and fetch data')
-    parser.add_argument('--input_issues', type=str, default='issues.json', help='Input file for issues data')
-    parser.add_argument('--input_releases', type=str, default='releases.json', help='Input file for releases data')
     parser.add_argument('--output_plot', type=str, default='open_issues_plot.png', help='Output file for the plot')
     args = parser.parse_args()
 
@@ -92,10 +90,10 @@ def main():
         logging.info(f"Releases saved to '{args.releases_file}'.")
 
     # Load issues and releases from JSON files
-    with open(args.input_issues, 'r') as file:
+    with open(args.issues_file, 'r') as file:
         issues = json.load(file)
 
-    with open(args.input_releases, 'r') as file:
+    with open(args.releases_file, 'r') as file:
         releases = json.load(file)
 
     # Processing issue data
