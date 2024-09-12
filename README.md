@@ -13,7 +13,7 @@ code changes, and more with easy-to-use tools designed to help you gain insights
 - [plot_open_issues.py](#plot_open_issuespy)
     - [Configurable Parameters](#configurable-parameters-1)
     - [Examples](#examples-1)
-- [plot_open_issues](#plot_open_issues)
+- [plot_open_issues.py](#plot_open_issuespy)
     - [Configurable Parameters](#configurable-parameters-2)
     - [Examples](#examples-2)
 
@@ -115,17 +115,9 @@ To generate the branch age plot, follow these steps:
 
 Clone the target repository:
 
- ```bash
- git clone <repository-url>
- ```
-
-Then, use the following command to plot all "release" branches (in this example it is Tribler's repo):
-
 ```bash
-python calculate_branch_age.py --repo_path ../../Tribler/tribler --branch_regex ".+release.+"
+git clone <repository-url>
 ```
-
-![tribler_branch_ages](https://github.com/user-attachments/assets/562e6765-bdf0-478b-9b4d-df1bb6cf08d2)
 
 Then, use the following command to plot all branches older than 100 days for https://github.com/arvidn/libtorrent
 
