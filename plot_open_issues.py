@@ -56,6 +56,8 @@ def main():
                         help='GitHub repository in the format "owner/repo"')
     parser.add_argument('--issues_file', type=str, default='out/issues.json', help='File to save issues data')
     parser.add_argument('--releases_file', type=str, default='out/releases.json', help='File to save releases data')
+    parser.add_argument('--state', type=str, default='all', help='State of issues to fetch (e.g., open, closed, all)')
+    parser.add_argument('--labels', type=str, default='type: bug', help='Labels to filter issues by')
     parser.add_argument('--override', action='store_true', help='Override existing files and fetch data')
     parser.add_argument('--output_plot', type=str, default='out/open_issues_plot.png', help='Output file for the plot')
     parser.add_argument('--show_release_timestamps', action='store_true', help='Display release timestamps on the plot')
@@ -71,7 +73,7 @@ def main():
     else:
         # Fetch issue data
         logging.info("Fetching issues...")
-        issues = fetch_github_data(repo, 'issues', {'state': 'all', 'labels': 'type: bug'})
+        issues = fetch_github_data(repo, 'issues', {'state': args.state, 'labels': args.labels})
 
         # Save issues to a JSON file
         with open(args.issues_file, 'w') as file:
