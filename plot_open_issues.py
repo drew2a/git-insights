@@ -158,7 +158,7 @@ def main():
         end_date = sorted_releases[i + 1][1] if i + 1 < len(sorted_releases) else last_date
         if args.color_releases:
             plt.axvspan(start_date, end_date, color=color, alpha=0.3)
-        elif args.show_release_timestamps:
+        if args.show_release_timestamps:
             plt.axvline(x=start_date, color='grey', linestyle='--', linewidth=0.8)
             plt.text(start_date, df_open_issues['open_issues'].max(), version, fontsize=8, color='grey', ha='left')
 
