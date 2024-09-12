@@ -13,6 +13,7 @@ code changes, and more with easy-to-use tools designed to help you gain insights
 - [plot_open_issues.py](#plot_open_issuespy)
     - [Configurable Parameters](#configurable-parameters-1)
     - [Examples](#examples-1)
+- [plot_open_issues](#plot_open_issues)
 
 ## Prerequisites
 
