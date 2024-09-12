@@ -1,8 +1,11 @@
 import argparse
 import json
+import logging
 
 import requests
 
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def fetch_github_data(repo, endpoint, params={}):
     """ Fetch data from a GitHub repository endpoint. """
@@ -10,7 +13,7 @@ def fetch_github_data(repo, endpoint, params={}):
     page = 1
     base_url = f'https://api.github.com/repos/{repo}/{endpoint}'
     while True:
-        print(f"Processing {endpoint}, page {page}...")
+        logging.info(f"Processing {endpoint}, page {page}...")
         url = f'{base_url}?page={page}&per_page=100'
         response = requests.get(url, params=params)
         page_data = response.json()
@@ -33,22 +36,22 @@ def main():
     repo = args.repo
 
     # Fetch issue data
-    print("Fetching issues...")
+    logging.info("Fetching issues...")
     issues = fetch_github_data(repo, 'issues', {'state': 'all', 'labels': 'type: bug'})
 
     # Save issues to a JSON file
     with open(args.issues_file, 'w') as file:
         json.dump(issues, file)
-    print(f"Issues saved to '{args.issues_file}'.")
+    logging.info(f"Issues saved to '{args.issues_file}'.")
 
     # Fetch release data
-    print("Fetching releases...")
+    logging.info("Fetching releases...")
     releases = fetch_github_data(repo, 'releases')
 
     # Save releases to a JSON file
     with open(args.releases_file, 'w') as file:
         json.dump(releases, file)
-    print(f"Releases saved to '{args.releases_file}'.")
+    logging.info(f"Releases saved to '{args.releases_file}'.")
 
 if __name__ == "__main__":
     main()
