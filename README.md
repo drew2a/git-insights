@@ -134,9 +134,13 @@ python calculate_branch_age.py --repo_path ../../arvidn/libtorrent --main_branch
 
 ## plot_open_issues.py
 
-`plot_open_issues.py` is a script designed to fetch and visualize open issues from a GitHub repository over time. It allows you to analyze the trend of open issues and visualize release periods with optional coloring and timestamp display.
+`plot_open_issues.py` is a script designed to fetch and visualize open issues from a GitHub repository over time. It
+allows you to analyze the trend of open issues and visualize release periods with optional coloring and timestamp
+display.
 
-Due to the limitations of the public GitHub REST API, the number of requests is restricted. To avoid frequent requests to GitHub, the script operates in two stages: first, it fetches all issues and releases and saves them to files; then, it analyzes these files.
+Due to the limitations of the public GitHub REST API, the number of requests is restricted. To avoid frequent requests
+to GitHub, the script operates in two stages: first, it fetches all issues and releases and saves them to files; then,
+it analyzes these files.
 
 ### Configurable Parameters
 
@@ -160,4 +164,5 @@ To generate the plot, use the following command:
 python plot_open_issues.py --repo Tribler/tribler --output_plot out/open_issues_plot.png --show_release_timestamps --color_releases
 ```
 
-This command will fetch issues and releases from the specified repository, save the data to JSON files, and generate a plot of open issues over time with colored release periods and timestamps.
+This command will fetch issues and releases from the specified repository, save the data to JSON files, and generate a
+plot of open issues over time with colored release periods and timestamps.
