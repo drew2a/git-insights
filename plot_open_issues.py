@@ -1,24 +1,23 @@
 import argparse
 import json
-import os
 import logging
-from datetime import datetime
-import json
+import os
 from datetime import datetime, timedelta
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import requests
 
-
 # Define color codes
 RESET = "\033[0m"
 COLORS = {
-    'DEBUG': "\033[94m",    # Blue
-    'INFO': "\033[92m",     # Green
+    'DEBUG': "\033[94m",  # Blue
+    'INFO': "\033[92m",  # Green
     'WARNING': "\033[93m",  # Yellow
-    'ERROR': "\033[91m",    # Red
-    'CRITICAL': "\033[95m", # Magenta
+    'ERROR': "\033[91m",  # Red
+    'CRITICAL': "\033[95m",  # Magenta
 }
+
 
 class ColoredFormatter(logging.Formatter):
     def format(self, record):
@@ -26,10 +25,12 @@ class ColoredFormatter(logging.Formatter):
         formatter = logging.Formatter(log_fmt)
         return formatter.format(record)
 
+
 # Set up logging with colored formatter
 handler = logging.StreamHandler()
 handler.setFormatter(ColoredFormatter())
 logging.basicConfig(level=logging.INFO, handlers=[handler])
+
 
 def fetch_github_data(repo, endpoint, params={}):
     """ Fetch data from a GitHub repository endpoint. """
@@ -51,7 +52,8 @@ def fetch_github_data(repo, endpoint, params={}):
 
 def main():
     parser = argparse.ArgumentParser(description='Fetch and save GitHub issues and releases.')
-    parser.add_argument('--repo', type=str, default='Tribler/tribler', help='GitHub repository in the format "owner/repo"')
+    parser.add_argument('--repo', type=str, default='Tribler/tribler',
+                        help='GitHub repository in the format "owner/repo"')
     parser.add_argument('--issues_file', type=str, default='out/issues.json', help='File to save issues data')
     parser.add_argument('--releases_file', type=str, default='out/releases.json', help='File to save releases data')
     parser.add_argument('--override', action='store_true', help='Override existing files and fetch data')
@@ -145,12 +147,13 @@ def main():
     logging.info("Plotting Open Issues Over Time with Release Groups...")
     plt.figure(figsize=(18, 6))
 
-    plt.plot(df_open_issues['date'], df_open_issues['open_issues'], marker='o', linestyle='-', label='Open Issues', markersize=4)
+    plt.plot(df_open_issues['date'], df_open_issues['open_issues'], marker='o', linestyle='-', label='Open Issues',
+             markersize=4)
 
     # Adding colored rectangles for release groups
     for i, (version, start_date) in enumerate(sorted_releases):
         color = colors[i % len(colors)]
-        end_date = sorted_releases[i+1][1] if i+1 < len(sorted_releases) else last_date
+        end_date = sorted_releases[i + 1][1] if i + 1 < len(sorted_releases) else last_date
         plt.axvspan(start_date, end_date, color=color, alpha=0.3)
         plt.text(start_date, df_open_issues['open_issues'].max(), version, fontsize=8, color=color, ha='left')
 
@@ -164,6 +167,7 @@ def main():
     logging.info(f"Plot saved to '{args.output_plot}'.")
 
     logging.info("Visualization completed.")
+
 
 if __name__ == "__main__":
     main()
