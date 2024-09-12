@@ -58,6 +58,8 @@ def main():
     parser.add_argument('--releases_file', type=str, default='out/releases.json', help='File to save releases data')
     parser.add_argument('--override', action='store_true', help='Override existing files and fetch data')
     parser.add_argument('--output_plot', type=str, default='out/open_issues_plot.png', help='Output file for the plot')
+    parser.add_argument('--show_release_timestamps', action='store_true', help='Display release timestamps on the plot')
+    parser.add_argument('--color_releases', action='store_true', help='Color the release periods on the plot')
     args = parser.parse_args()
 
     # Define the repository
@@ -139,7 +141,7 @@ def main():
     sorted_releases = sorted(grouped_releases.items(), key=lambda x: x[1])
 
     # Rainbow colors
-    colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+    colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'] if args.color_releases else ['grey']
 
     # Plotting
     logging.info("Plotting Open Issues Over Time with Release Groups...")
@@ -152,8 +154,10 @@ def main():
     for i, (version, start_date) in enumerate(sorted_releases):
         color = colors[i % len(colors)]
         end_date = sorted_releases[i + 1][1] if i + 1 < len(sorted_releases) else last_date
-        plt.axvspan(start_date, end_date, color=color, alpha=0.3)
-        plt.text(start_date, df_open_issues['open_issues'].max(), version, fontsize=8, color=color, ha='left')
+        if args.color_releases:
+            plt.axvspan(start_date, end_date, color=color, alpha=0.3)
+        if args.show_release_timestamps:
+            plt.text(start_date, df_open_issues['open_issues'].max(), version, fontsize=8, color=color, ha='left')
 
     plt.title('Open Issues Over Time with Colored Release Periods')
     plt.xlabel('Date')
