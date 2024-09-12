@@ -1,3 +1,4 @@
+import argparse
 import json
 
 import requests
@@ -21,23 +22,33 @@ def fetch_github_data(repo, endpoint, params={}):
     return data
 
 
-# Define the repository
-repo = 'Tribler/tribler'
+def main():
+    parser = argparse.ArgumentParser(description='Fetch and save GitHub issues and releases.')
+    parser.add_argument('--repo', type=str, default='Tribler/tribler', help='GitHub repository in the format "owner/repo"')
+    parser.add_argument('--issues_file', type=str, default='issues.json', help='File to save issues data')
+    parser.add_argument('--releases_file', type=str, default='releases.json', help='File to save releases data')
+    args = parser.parse_args()
 
-# Fetch issue data
-print("Fetching issues...")
-issues = fetch_github_data(repo, 'issues', {'state': 'all', 'labels': 'type: bug'})
+    # Define the repository
+    repo = args.repo
 
-# Save issues to a JSON file
-with open('issues.json', 'w') as file:
-    json.dump(issues, file)
-print("Issues saved to 'issues.json'.")
+    # Fetch issue data
+    print("Fetching issues...")
+    issues = fetch_github_data(repo, 'issues', {'state': 'all', 'labels': 'type: bug'})
 
-# Fetch release data
-print("Fetching releases...")
-releases = fetch_github_data(repo, 'releases')
+    # Save issues to a JSON file
+    with open(args.issues_file, 'w') as file:
+        json.dump(issues, file)
+    print(f"Issues saved to '{args.issues_file}'.")
 
-# Save releases to a JSON file
-with open('releases.json', 'w') as file:
-    json.dump(releases, file)
-print("Releases saved to 'releases.json'.")
+    # Fetch release data
+    print("Fetching releases...")
+    releases = fetch_github_data(repo, 'releases')
+
+    # Save releases to a JSON file
+    with open(args.releases_file, 'w') as file:
+        json.dump(releases, file)
+    print(f"Releases saved to '{args.releases_file}'.")
+
+if __name__ == "__main__":
+    main()
