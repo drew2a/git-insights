@@ -161,8 +161,8 @@ The script `plot_open_issues.py` accepts the following configurable parameters:
 To generate the plot, use the following command:
 
 ```bash
-python plot_open_issues.py --repo Tribler/tribler --output_plot out/open_issues_plot.png --show_release_timestamps --color_releases
+python plot_open_issues.py --repo Tribler/tribler --labels "type: bug" --output_plot out/open_issues_plot.png --show_release_timestamps --color_releases
 ```
 
 This command will fetch issues and releases from the specified repository, save the data to JSON files, and generate a
-plot of open issues over time with colored release periods and timestamps.
+plot of open bugs over time with colored release periods and timestamps.
