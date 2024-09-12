@@ -55,6 +55,9 @@ def main():
     parser.add_argument('--issues_file', type=str, default='out/issues.json', help='File to save issues data')
     parser.add_argument('--releases_file', type=str, default='out/releases.json', help='File to save releases data')
     parser.add_argument('--override', action='store_true', help='Override existing files and fetch data')
+    parser.add_argument('--input_issues', type=str, default='issues.json', help='Input file for issues data')
+    parser.add_argument('--input_releases', type=str, default='releases.json', help='Input file for releases data')
+    parser.add_argument('--output_plot', type=str, default='open_issues_plot.png', help='Output file for the plot')
     args = parser.parse_args()
 
     # Define the repository
@@ -87,14 +90,14 @@ def main():
         logging.info(f"Releases saved to '{args.releases_file}'.")
 
     # Load issues and releases from JSON files
-    with open('issues.json', 'r') as file:
+    with open(args.input_issues, 'r') as file:
         issues = json.load(file)
 
-    with open('releases.json', 'r') as file:
+    with open(args.input_releases, 'r') as file:
         releases = json.load(file)
 
     # Processing issue data
-    print("Processing issue data...")
+    logging.info("Processing issue data...")
     issue_data = []
     for issue in issues:
         created_at = datetime.strptime(issue['created_at'], '%Y-%m-%dT%H:%M:%SZ')
@@ -139,7 +142,7 @@ def main():
     colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
 
     # Plotting
-    print("Plotting Open Issues Over Time with Release Groups...")
+    logging.info("Plotting Open Issues Over Time with Release Groups...")
     plt.figure(figsize=(18, 6))
 
     plt.plot(df_open_issues['date'], df_open_issues['open_issues'], marker='o', linestyle='-', label='Open Issues', markersize=4)
@@ -157,9 +160,10 @@ def main():
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.show()
+    plt.savefig(args.output_plot)
+    logging.info(f"Plot saved to '{args.output_plot}'.")
 
-    print("Visualization completed.")
+    logging.info("Visualization completed.")
 
 if __name__ == "__main__":
     main()
