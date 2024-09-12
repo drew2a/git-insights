@@ -14,6 +14,8 @@ code changes, and more with easy-to-use tools designed to help you gain insights
     - [Configurable Parameters](#configurable-parameters-1)
     - [Examples](#examples-1)
 - [plot_open_issues](#plot_open_issues)
+    - [Parameters](#configurable-parameters-2)
+    - [Examples](#examples-2)
 
 ## Prerequisites
 
