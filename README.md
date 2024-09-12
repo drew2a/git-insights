@@ -10,6 +10,7 @@ code changes, and more with easy-to-use tools designed to help you gain insights
     - [Configurable Parameters](#configurable-parameters)
     - [Examples](#examples)
 - [calculate_branch_age.py](#calculate_branch_agepy)
+- [plot_open_issues.py](#plot_open_issuespy)
     - [Configurable Parameters](#configurable-parameters-1)
     - [Examples](#examples-1)
 
@@ -132,3 +133,29 @@ python calculate_branch_age.py --repo_path ../../arvidn/libtorrent --main_branch
 ![libtorrent_branch_ages](https://github.com/user-attachments/assets/1774e42f-fe64-40c3-b755-ebc5eda36309)
 
 ## plot_open_issues.py
+
+`plot_open_issues.py` is a script designed to fetch and visualize open issues from a GitHub repository over time. It allows you to analyze the trend of open issues and visualize release periods with optional coloring and timestamp display.
+
+### Configurable Parameters
+
+The script `plot_open_issues.py` accepts the following configurable parameters:
+
+- `--repo`: GitHub repository in the format "owner/repo". Default is `Tribler/tribler`.
+- `--issues_file`: File to save issues data. Default is `out/issues.json`.
+- `--releases_file`: File to save releases data. Default is `out/releases.json`.
+- `--state`: State of issues to fetch (e.g., open, closed, all). Default is `all`.
+- `--labels`: Labels to filter issues by. Default is `type: bug`.
+- `--override`: Override existing files and fetch new data. This is a flag, so it has no default value.
+- `--output_plot`: Output file for the plot. Default is `out/open_issues_plot.png`.
+- `--show_release_timestamps`: Display release timestamps on the plot. This is a flag, so it has no default value.
+- `--color_releases`: Color the release periods on the plot. This is a flag, so it has no default value.
+
+### Examples
+
+To generate the plot, use the following command:
+
+```bash
+python plot_open_issues.py --repo Tribler/tribler --output_plot out/open_issues_plot.png --show_release_timestamps --color_releases
+```
+
+This command will fetch issues and releases from the specified repository, save the data to JSON files, and generate a plot of open issues over time with colored release periods and timestamps.
