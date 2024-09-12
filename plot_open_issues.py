@@ -6,7 +6,26 @@ import logging
 import requests
 
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Define color codes
+RESET = "\033[0m"
+COLORS = {
+    'DEBUG': "\033[94m",    # Blue
+    'INFO': "\033[92m",     # Green
+    'WARNING': "\033[93m",  # Yellow
+    'ERROR': "\033[91m",    # Red
+    'CRITICAL': "\033[95m", # Magenta
+}
+
+class ColoredFormatter(logging.Formatter):
+    def format(self, record):
+        log_fmt = f"{COLORS.get(record.levelname, RESET)}%(asctime)s - %(levelname)s - %(message)s{RESET}"
+        formatter = logging.Formatter(log_fmt)
+        return formatter.format(record)
+
+# Set up logging with colored formatter
+handler = logging.StreamHandler()
+handler.setFormatter(ColoredFormatter())
+logging.basicConfig(level=logging.INFO, handlers=[handler])
 
 def fetch_github_data(repo, endpoint, params={}):
     """ Fetch data from a GitHub repository endpoint. """
