@@ -1,5 +1,7 @@
 # git-insights
 
+> **Disclaimer:** This repository was entirely created by AI using [aider.chat](https://aider.chat/). All visualization ideas belong to @drew2a, but the code and documentation were written by ChatGPT-4 and Claude-3.5-Sonnet.
+
 A collection of scripts for analyzing and visualizing Git repositories. Explore commit history, contributor activity,
 code changes, and more with easy-to-use tools designed to help you gain insights into your codebase.
 
